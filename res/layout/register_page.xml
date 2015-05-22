@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    android:id="@+id/loginRoot"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@drawable/default_bg_hdpi"
-    android:orientation="vertical" >
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
 
     <RelativeLayout
             android:id="@+id/login_view"
@@ -22,77 +16,90 @@
             android:paddingTop="21.0px" >
 
         <EditText
-                android:id="@+id/login_edit_accountt"
+                android:id="@+id/register_edit_account"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_marginBottom="5.0px"
                 android:layout_marginLeft="5.0dip"
-                android:layout_marginRight="5.0dip"
                 android:layout_marginTop="5.0dip"
                 android:inputType="number"
-                android:maxLength="10"
-                android:paddingLeft="60.0sp"
-                android:saveEnabled="true"
-                android:visibility="invisible"/>
+                android:maxLength="11"
+                android:paddingLeft="65.0sp"
+                android:saveEnabled="true" />
 
         <TextView
                 android:id="@+id/TextView01"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/login_edit_accountt"
-                android:layout_alignLeft="@+id/login_edit_accountt"
-                android:layout_alignTop="@+id/login_edit_accountt"
+                android:layout_alignBottom="@+id/register_edit_account"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_alignTop="@+id/register_edit_account"
                 android:layout_marginRight="15.0sp"
                 android:gravity="center_vertical"
                 android:paddingLeft="7.0sp"
                 android:text="@string/strAccInputLabel"
                 android:textColor="#ff3f3f3f"
-                android:textSize="16.0dip"
-                android:visibility="invisible"/>
+                android:textSize="16.0dip" />
 
         <EditText
-                android:id="@+id/login_edit_pwd"
+                android:id="@+id/register_edit_pwd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/login_edit_accountt"
-                android:layout_alignRight="@+id/login_edit_accountt"
-                android:layout_below="@+id/login_edit_accountt"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_alignRight="@+id/register_edit_account"
+                android:layout_below="@+id/register_edit_account"
                 android:layout_marginRight="1.0dip"
                 android:inputType="textPassword"
                 android:maxLength="16"
-                android:paddingLeft="60.0sp"
+                android:paddingLeft="65.0sp"
                 android:saveEnabled="true" />
 
         <TextView
                 android:id="@+id/TextView02"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/login_edit_pwd"
-                android:layout_alignLeft="@+id/TextView01"
-                android:layout_alignTop="@+id/login_edit_pwd"
+                android:layout_alignBottom="@+id/register_edit_pwd"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_alignTop="@+id/register_edit_pwd"
                 android:gravity="center_vertical"
                 android:paddingLeft="7.0sp"
                 android:text="@string/strPswInputLabel"
                 android:textColor="#ff3f3f3f"
                 android:textSize="16.0dip" />
 
-        <Button
-                android:id="@+id/login_btn_login"
-                android:layout_width="fill_parent"
+        <EditText
+                android:id="@+id/register_edit_secpwd"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/login_edit_pwd"
-                android:layout_marginBottom="5.0px"
-                android:layout_marginLeft="5.0dip"
-                android:layout_marginRight="5.0dip"
-                android:layout_marginTop="5.0dip"
-                android:text="@string/login" />
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_centerInParent="true"
+                android:layout_alignRight="@+id/register_edit_account"
+                android:layout_below="@+id/register_edit_pwd"
+                android:layout_marginRight="1.0dip"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:paddingLeft="65.0sp"
+                android:saveEnabled="true" />
+
+        <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/register_edit_secpwd"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_alignTop="@+id/register_edit_secpwd"
+                android:gravity="center_vertical"
+                android:paddingLeft="7.0sp"
+                android:text="@string/strSecPswInputLabel"
+                android:textColor="#ff3f3f3f"
+                android:textSize="16.0dip" />
 
         <Button
-                android:id="@+id/login_btn_logoff"
+                android:id="@+id/register_btn_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/login_btn_login"
+                android:layout_below="@id/register_edit_secpwd"
                 android:layout_marginBottom="5.0px"
                 android:layout_marginLeft="5.0dip"
                 android:layout_marginRight="5.0dip"
@@ -123,6 +130,4 @@
                 android:textSize="20.0dip" />
     </RelativeLayout>
 
-
 </LinearLayout>
-
