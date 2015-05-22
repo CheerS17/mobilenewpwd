@@ -74,6 +74,9 @@ public class homeActivity extends Activity {
                             TextView nNumber = (TextView) tempView.findViewById(R.id.vlist_nNumber);
                             TextView pNumber = (TextView) tempView.findViewById(R.id.vlist_pNumber);
                             Toast.makeText(homeActivity.this, sitename.getText().toString() + " " + mode + "", Toast.LENGTH_SHORT).show();
+
+                            intent.setClass(homeActivity.this, CaptureActivity.class);
+                            startActivity(intent);
                         } else if (mode == 1) {
                             TextView sitename = (TextView) tempView.findViewById(R.id.vlist_sitename);
                             TextView siteUsername = (TextView) tempView.findViewById(R.id.vlist_siteUsername);
