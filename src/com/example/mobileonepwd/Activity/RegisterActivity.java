@@ -22,6 +22,7 @@ public class RegisterActivity extends Activity {
     private EditText phoneNumber;
     private EditText pwd;
     private EditText secPwd;
+    private EditText easyPwd;
 
     private Button registerButton;
     private Button cancelButton;
@@ -35,6 +36,7 @@ public class RegisterActivity extends Activity {
 
         phoneNumber = (EditText) findViewById(R.id.register_edit_account);
         pwd = (EditText) findViewById(R.id.register_edit_pwd);
+        easyPwd = (EditText) findViewById(R.id.register_edit_easepwd);
         secPwd = (EditText) findViewById(R.id.register_edit_secpwd);
 
         registerButton = (Button) findViewById(R.id.register_btn_register);

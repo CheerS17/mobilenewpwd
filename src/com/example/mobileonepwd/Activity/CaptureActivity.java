@@ -49,7 +49,6 @@ public class CaptureActivity extends Activity implements Callback
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.qr_main);
-		// ��ʼ�� CameraManager
 		CameraManager.init(getApplication());
 		viewfinderView = (ViewfinderView) findViewById(R.id.viewfinder_view);
 		hasSurface = false;
@@ -185,13 +184,20 @@ public class CaptureActivity extends Activity implements Callback
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				//��Ĭ���������ɨ��õ��ĵ�ַ
 				Intent intent = new Intent();
+                /*
 				intent.setAction("android.intent.action.VIEW");
 				Uri content_url = Uri.parse(obj.getText());
 				intent.setData(content_url);
 				startActivity(intent);
 				finish();
+				*/
+                Bundle bundle = new Bundle();
+                bundle.putString("randomCode", obj.getText());
+                intent.setClass(CaptureActivity.this, homeActivity.class);
+                intent.putExtras(bundle);
+                setResult(101, intent);
+                finish();
 			}
 		});
 		dialog.setPositiveButton("取消", new DialogInterface.OnClickListener()

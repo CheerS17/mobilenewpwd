@@ -28,6 +28,7 @@ public class UserDataManager {
     public static final String ID = "_id";
     public static final String USER_ID = "user_id";
     public static final String PHONE = "phone";
+    public static final String EASYPWD = "easypwd";
     public static final String SITENAME = "sitename";
     public static final String SITE_USERNAME = "site_username";
     public static final String L_COUNT = "l_count";
@@ -174,9 +175,9 @@ public class UserDataManager {
     /**
      * @return
      */
-    public boolean deleteAllUserDatas() {
+    public void deleteAllUserDatas() {
 
-        return mSQLiteDatabase.delete(TABLE_NAME_USER, null, null) > 0;
+        mSQLiteDatabase.execSQL("delete from " + TABLE_NAME_USER+";");
     }
 
 

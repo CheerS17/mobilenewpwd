@@ -2,7 +2,6 @@ package com.example.mobileonepwd.Activity;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Application;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +10,8 @@ import android.widget.*;
 import com.example.mobileonepwd.R;
 import com.example.mobileonepwd.dao.UserDataManager;
 import com.example.mobileonepwd.entity.Info;
+import com.example.mobileonepwd.entity.User;
+import com.example.mobileonepwd.util.AES;
 
 import java.text.DateFormat;
 import java.util.*;
@@ -21,6 +22,7 @@ import java.util.*;
 public class homeActivity extends Activity {
 
     private Button addNew;
+    private Button logout;
     private Intent intent = new Intent();
     private ListView listView;
     private UserDataManager userDataManager;
@@ -31,7 +33,15 @@ public class homeActivity extends Activity {
     private int n;
     private int p;
 
+    private static String plainText;
+
     private int mode;
+
+    @Override
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,6 +49,7 @@ public class homeActivity extends Activity {
         setContentView(R.layout.home);
 
         addNew = (Button) findViewById(R.id.home_add_new_button);
+        logout = (Button) findViewById(R.id.home_logout_button);
         listView = (ListView) findViewById(R.id.home_listView);
 
         if (userDataManager == null) {
@@ -73,10 +84,12 @@ public class homeActivity extends Activity {
                             TextView lNumber = (TextView) tempView.findViewById(R.id.vlist_lNumber);
                             TextView nNumber = (TextView) tempView.findViewById(R.id.vlist_nNumber);
                             TextView pNumber = (TextView) tempView.findViewById(R.id.vlist_pNumber);
+
+                            plainText = sitename.toString()+siteUsername.toString()+lNumber.toString()+nNumber.toString()+pNumber.toString();
                             Toast.makeText(homeActivity.this, sitename.getText().toString() + " " + mode + "", Toast.LENGTH_SHORT).show();
 
                             intent.setClass(homeActivity.this, CaptureActivity.class);
-                            startActivity(intent);
+                            startActivityForResult(intent,101);
                         } else if (mode == 1) {
                             TextView sitename = (TextView) tempView.findViewById(R.id.vlist_sitename);
                             TextView siteUsername = (TextView) tempView.findViewById(R.id.vlist_siteUsername);
@@ -108,37 +121,58 @@ public class homeActivity extends Activity {
             }
         });
 
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                userDataManager.deleteAllUserDatas();
+                User user = userDataManager.getUser();
+                if (user.getPhone() == null) {
+                    intent.setClass(homeActivity.this, loginActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 100) {
-            Bundle bundle = data.getExtras();
+        if (data != null) {
+            if (requestCode == 100) {
+                Bundle bundle = data.getExtras();
 
-            sitename = bundle.getString("editActivity_editText1");
-            siteUsername = bundle.getString("editActivity_editText2");
-            l = bundle.getInt("editActivity_l", 5);
-            n = bundle.getInt("editActivity_n", 5);
-            p = bundle.getInt("editActivity_p", 5);
+                sitename = bundle.getString("editActivity_editText1");
+                siteUsername = bundle.getString("editActivity_editText2");
+                l = bundle.getInt("editActivity_l", 5);
+                n = bundle.getInt("editActivity_n", 5);
+                p = bundle.getInt("editActivity_p", 5);
 
-            Info info = new Info();
-            info.setSitename(sitename);
-            info.setSiteUsername(siteUsername);
-            info.setLCount(l);
-            info.setNCount(n);
-            info.setPCount(p);
+                Info info = new Info();
+                info.setSitename(sitename);
+                info.setSiteUsername(siteUsername);
+                info.setLCount(l);
+                info.setNCount(n);
+                info.setPCount(p);
 
 
-            userDataManager.insertInfo(info, userDataManager.getUser().getPhone());
+                userDataManager.insertInfo(info, userDataManager.getUser().getPhone());
 
-            SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.vlist,
-                    new String[]{"sitename", "siteUsername", "time", "lNumber", "nNumber", "pNumber"},
-                    new int[]{R.id.vlist_sitename, R.id.vlist_siteUsername, R.id.vlist_time, R.id.vlist_lNumber, R.id.vlist_nNumber, R.id.vlist_pNumber});
+                SimpleAdapter adapter = new SimpleAdapter(this, getData(), R.layout.vlist,
+                        new String[]{"sitename", "siteUsername", "time", "lNumber", "nNumber", "pNumber"},
+                        new int[]{R.id.vlist_sitename, R.id.vlist_siteUsername, R.id.vlist_time, R.id.vlist_lNumber, R.id.vlist_nNumber, R.id.vlist_pNumber});
 //            listView = (ListView) findViewById(R.id.home_listView);
-            listView.setAdapter(adapter);
+                listView.setAdapter(adapter);
 
-            Toast.makeText(homeActivity.this, sitename + " " + siteUsername + " " + l + " " + n + " " + p, Toast.LENGTH_SHORT).show();
+                Toast.makeText(homeActivity.this, sitename + " " + siteUsername + " " + l + " " + n + " " + p, Toast.LENGTH_SHORT).show();
+            }
+            if (requestCode == 101){
+
+                Bundle bundle = data.getExtras();
+                String key = bundle.getString("randomCode");
+                Toast.makeText(getApplicationContext(),plainText,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),new String(AES.encrypt(plainText,key)),Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

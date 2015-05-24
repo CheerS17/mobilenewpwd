@@ -31,10 +31,9 @@
                 android:layout_marginRight="5.0dip"
                 android:layout_marginTop="5.0dip"
                 android:inputType="number"
-                android:maxLength="10"
-                android:paddingLeft="60.0sp"
-                android:saveEnabled="true"
-                android:visibility="invisible"/>
+                android:maxLength="11"
+                android:hint="@string/strAccInputLabel"
+                android:saveEnabled="true"/>
 
         <TextView
                 android:id="@+id/TextView01"
@@ -61,7 +60,7 @@
                 android:layout_marginRight="1.0dip"
                 android:inputType="textPassword"
                 android:maxLength="16"
-                android:paddingLeft="60.0sp"
+                android:hint="@string/strPswInputLabel"
                 android:saveEnabled="true" />
 
         <TextView
@@ -75,7 +74,8 @@
                 android:paddingLeft="7.0sp"
                 android:text="@string/strPswInputLabel"
                 android:textColor="#ff3f3f3f"
-                android:textSize="16.0dip" />
+                android:textSize="16.0dip"
+                android:visibility="invisible"/>
 
         <Button
                 android:id="@+id/login_btn_login"
@@ -86,10 +86,21 @@
                 android:layout_marginLeft="5.0dip"
                 android:layout_marginRight="5.0dip"
                 android:layout_marginTop="5.0dip"
+                android:text="确 定" />
+
+        <Button
+                android:id="@+id/login_btn_login_please"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/login_edit_pwd"
+                android:layout_marginBottom="5.0px"
+                android:layout_marginLeft="5.0dip"
+                android:layout_marginRight="5.0dip"
+                android:layout_marginTop="5.0dip"
                 android:text="@string/login" />
 
         <Button
-                android:id="@+id/login_btn_logoff"
+                android:id="@+id/login_btn_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/login_btn_login"

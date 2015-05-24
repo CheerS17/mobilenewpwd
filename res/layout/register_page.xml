@@ -95,11 +95,39 @@
                 android:textColor="#ff3f3f3f"
                 android:textSize="16.0dip" />
 
+        <EditText
+                android:id="@+id/register_edit_easepwd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_centerInParent="true"
+                android:layout_alignRight="@+id/register_edit_account"
+                android:layout_below="@+id/register_edit_secpwd"
+                android:layout_marginRight="1.0dip"
+                android:inputType="textPassword"
+                android:maxLength="16"
+                android:paddingLeft="65.0sp"
+                android:saveEnabled="true" />
+
+
+        <TextView
+                android:id="@+id/TextView04"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/register_edit_easepwd"
+                android:layout_alignLeft="@+id/register_edit_account"
+                android:layout_alignTop="@+id/register_edit_easepwd"
+                android:gravity="center_vertical"
+                android:paddingLeft="7.0sp"
+                android:text="简单密码"
+                android:textColor="#ff3f3f3f"
+                android:textSize="16.0dip" />
+
         <Button
                 android:id="@+id/register_btn_register"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/register_edit_secpwd"
+                android:layout_below="@id/register_edit_easepwd"
                 android:layout_marginBottom="5.0px"
                 android:layout_marginLeft="5.0dip"
                 android:layout_marginRight="5.0dip"

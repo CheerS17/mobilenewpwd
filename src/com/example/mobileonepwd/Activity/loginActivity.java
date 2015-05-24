@@ -17,8 +17,10 @@ public class loginActivity extends Activity {
      */
     private EditText mAccount;
     private EditText mPwd;
-    private Button mLogoffButton;
+
+    private Button mRegisterButton;
     private Button mLoginButton;
+    private Button loginButtonPlease;
     private Intent intent = new Intent();
     private UserDataManager userDataManager;
 
@@ -33,34 +35,46 @@ public class loginActivity extends Activity {
             userDataManager.openDataBase();
         }
 
-        User user = userDataManager.getUser();
-        if (user.getPhone() == null) {
-            register();
-        }
 
-//        mAccount = (EditText) findViewById(R.id.login_edit_accountt);
+
+        mAccount = (EditText) findViewById(R.id.login_edit_accountt);
         mPwd = (EditText) findViewById(R.id.login_edit_pwd);
-        mLogoffButton = (Button) findViewById(R.id.login_btn_logoff);
-        mLogoffButton.setVisibility(Button.INVISIBLE);
+
+        mRegisterButton = (Button) findViewById(R.id.login_btn_register);
         mLoginButton = (Button) findViewById(R.id.login_btn_login);
+        loginButtonPlease = (Button) findViewById(R.id.login_btn_login_please);
 //        loginView=findViewById(R.id.login_view);
 //        loginSuccessView=findViewById(R.id.login_success_view);
 //        loginSuccessShow=(TextView) findViewById(R.id.login_success_show);
 
-        mLogoffButton.setOnClickListener(mListener);
+        mRegisterButton.setOnClickListener(mListener);
         mLoginButton.setOnClickListener(mListener);
+        loginButtonPlease.setOnClickListener(mListener);
+
+        User user = userDataManager.getUser();
+        if (user.getPhone() != null) {
+            mAccount.setVisibility(EditText.INVISIBLE);
+            mRegisterButton.setVisibility(View.INVISIBLE);
+            loginButtonPlease.setVisibility(View.INVISIBLE);
+        } else {
+            mLoginButton.setVisibility(View.INVISIBLE);
+        }
 
     }
 
     View.OnClickListener mListener = new View.OnClickListener() {
         public void onClick(View v) {
             switch (v.getId()) {
-                case R.id.login_btn_logoff:
-//                    register();
+                case R.id.login_btn_register:
+                    register();
                     break;
                 case R.id.login_btn_login:
                     login();
                     break;
+                case R.id.login_btn_login_please:
+                    login_please();
+                    break;
+
             }
         }
     };
@@ -71,13 +85,42 @@ public class loginActivity extends Activity {
         startActivity(intent);
     }
 
+    /**
+     *
+     */
     public void login() {
-        if (true/*服务器验证信息正确*/) {
+
+        if (verify(userDataManager.getUser().getPhone(), mPwd.getText().toString())) {
             intent.setClass(this, homeActivity.class);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this,"输入的用户名或者密码有误!", Toast.LENGTH_SHORT).show();
             mPwd.setText("");
         }
+    }
+
+    /**
+     *
+     */
+    public void login_please() {
+
+        if (verify(mAccount.getText().toString(), mPwd.getText().toString())) {
+            User user = new User();
+            user.setPhone(mAccount.getText().toString());
+            user.setPwd(mPwd.getText().toString());
+            user.setToken("123123");
+            userDataManager.insertUserData(user);
+            intent.setClass(this, homeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Toast.makeText(this,"输入的用户名或者密码有误!", Toast.LENGTH_SHORT).show();
+            mPwd.setText("");
+        }
+    }
+
+    private Boolean verify(String phone, String pwd) {
+        return true;
     }
 }
