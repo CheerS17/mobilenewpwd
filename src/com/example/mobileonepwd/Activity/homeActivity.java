@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.mobileonepwd.R;
@@ -34,6 +35,8 @@ public class homeActivity extends Activity {
     private int p;
 
     private static String plainText;
+    //randomCode is Key
+    private String ramdonCode;
 
     private int mode;
 
@@ -155,6 +158,10 @@ public class homeActivity extends Activity {
                 info.setNCount(n);
                 info.setPCount(p);
 
+                plainText = sitename + siteUsername + l + n + p;
+
+                intent.setClass(homeActivity.this, CaptureActivity.class);
+                startActivityForResult(intent,101);
 
                 userDataManager.insertInfo(info, userDataManager.getUser().getPhone());
 
@@ -169,9 +176,10 @@ public class homeActivity extends Activity {
             if (requestCode == 101){
 
                 Bundle bundle = data.getExtras();
-                String key = bundle.getString("randomCode");
-                Toast.makeText(getApplicationContext(),plainText,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),new String(AES.encrypt(plainText,key)),Toast.LENGTH_SHORT).show();
+                ramdonCode = bundle.getString("randomCode");
+//                Toast.makeText(getApplicationContext(),plainText,Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),new String(AES.encrypt(plainText,ramdonCode)),Toast.LENGTH_SHORT).show();
+                Log.i("haha",new String(AES.encrypt(plainText, ramdonCode)));
             }
         }
     }

@@ -34,7 +34,7 @@ public class editActivity extends Activity {
         setContentView(R.layout.edit);
 
         lPicker = (NumberPicker) findViewById(R.id.edit_numberPicker1);
-        nPicker = (NumberPicker) findViewById(R.id.edit_numberPicker2);
+        nPicker = (NumberPicker) findViewById(R.id.edit_numberPicker4);
         pPicker = (NumberPicker) findViewById(R.id.edit_numberPicker3);
         enterButton = (Button) findViewById(R.id.edit_enter_button);
         editText1 = (EditText) findViewById(R.id.edit_editText1);
