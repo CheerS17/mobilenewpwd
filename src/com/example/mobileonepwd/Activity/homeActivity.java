@@ -88,7 +88,7 @@ public class homeActivity extends Activity {
                             TextView nNumber = (TextView) tempView.findViewById(R.id.vlist_nNumber);
                             TextView pNumber = (TextView) tempView.findViewById(R.id.vlist_pNumber);
 
-                            plainText = sitename.toString()+siteUsername.toString()+lNumber.toString()+nNumber.toString()+pNumber.toString();
+                            plainText = sitename.getText().toString()+siteUsername.getText().toString()+lNumber.getText().toString()+nNumber.getText().toString()+pNumber.getText().toString();
                             Toast.makeText(homeActivity.this, sitename.getText().toString() + " " + mode + "", Toast.LENGTH_SHORT).show();
 
                             intent.setClass(homeActivity.this, CaptureActivity.class);
@@ -178,8 +178,8 @@ public class homeActivity extends Activity {
                 Bundle bundle = data.getExtras();
                 ramdonCode = bundle.getString("randomCode");
 //                Toast.makeText(getApplicationContext(),plainText,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),new String(AES.encrypt(plainText,ramdonCode)),Toast.LENGTH_SHORT).show();
-                Log.i("haha",new String(AES.encrypt(plainText, ramdonCode)));
+                Toast.makeText(getApplicationContext(),AES.parseByte2HexStr(AES.encrypt(plainText,ramdonCode)),Toast.LENGTH_SHORT).show();
+                Log.i("haha",AES.parseByte2HexStr(AES.encrypt(plainText, ramdonCode)));
             }
         }
     }

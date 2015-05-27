@@ -14,8 +14,8 @@ public class AES {
     /**
      * 加密
      *
-     * @param content 需要加密的内容
-     * @param password  加密密码
+     * @param content  需要加密的内容
+     * @param password 加密密码
      * @return
      */
     public static byte[] encrypt(String content, String password) {
@@ -34,5 +34,21 @@ public class AES {
             e.printStackTrace();
         }
         return null;
+    }
+
+    /**将二进制转换成16进制
+     * @param buf
+     * @return
+     */
+    public static String parseByte2HexStr(byte buf[]) {
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < buf.length; i++) {
+            String hex = Integer.toHexString(buf[i] & 0xFF);
+            if (hex.length() == 1) {
+                hex = '0' + hex;
+            }
+            sb.append(hex.toUpperCase());
+        }
+        return sb.toString();
     }
 }
