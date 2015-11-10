@@ -119,7 +119,7 @@
                 android:layout_alignTop="@+id/register_edit_easepwd"
                 android:gravity="center_vertical"
                 android:paddingLeft="7.0sp"
-                android:text="简单密码"
+                android:text=""
                 android:textColor="#ff3f3f3f"
                 android:textSize="16.0dip" />
 

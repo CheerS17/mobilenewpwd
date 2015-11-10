@@ -71,7 +71,7 @@ public class homeActivity extends Activity {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
 
                 final View tempView = view;
-                new AlertDialog.Builder(homeActivity.this).setTitle("复选框").setSingleChoiceItems(new String[]{"传送", "删除"}, 0, new DialogInterface.OnClickListener() {
+                new AlertDialog.Builder(homeActivity.this).setTitle("复选框").setSingleChoiceItems(new String[]{"传送", "删除", "修改"}, 0, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         mode = i;
@@ -88,11 +88,11 @@ public class homeActivity extends Activity {
                             TextView nNumber = (TextView) tempView.findViewById(R.id.vlist_nNumber);
                             TextView pNumber = (TextView) tempView.findViewById(R.id.vlist_pNumber);
 
-                            plainText = sitename.getText().toString()+siteUsername.getText().toString()+lNumber.getText().toString()+nNumber.getText().toString()+pNumber.getText().toString();
+                            plainText = sitename.getText().toString() + siteUsername.getText().toString() + lNumber.getText().toString() + nNumber.getText().toString() + pNumber.getText().toString();
                             Toast.makeText(homeActivity.this, sitename.getText().toString() + " " + mode + "", Toast.LENGTH_SHORT).show();
 
                             intent.setClass(homeActivity.this, CaptureActivity.class);
-                            startActivityForResult(intent,101);
+                            startActivityForResult(intent, 101);
                         } else if (mode == 1) {
                             TextView sitename = (TextView) tempView.findViewById(R.id.vlist_sitename);
                             TextView siteUsername = (TextView) tempView.findViewById(R.id.vlist_siteUsername);
@@ -103,6 +103,8 @@ public class homeActivity extends Activity {
                                     new String[]{"sitename", "siteUsername", "time", "lNumber", "nNumber", "pNumber"},
                                     new int[]{R.id.vlist_sitename, R.id.vlist_siteUsername, R.id.vlist_time, R.id.vlist_lNumber, R.id.vlist_nNumber, R.id.vlist_pNumber});
                             listView.setAdapter(adapter);
+                        } else if (mode == 2) {
+                            //not implement
                         }
                     }
                 }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
@@ -127,7 +129,7 @@ public class homeActivity extends Activity {
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userDataManager.deleteAllUserDatas();
+                userDataManager.deleteAllUsers();
                 User user = userDataManager.getUser();
                 if (user.getPhone() == null) {
                     intent.setClass(homeActivity.this, loginActivity.class);
@@ -161,7 +163,7 @@ public class homeActivity extends Activity {
                 plainText = sitename + siteUsername + l + n + p;
 
                 intent.setClass(homeActivity.this, CaptureActivity.class);
-                startActivityForResult(intent,101);
+                startActivityForResult(intent, 101);
 
                 userDataManager.insertInfo(info, userDataManager.getUser().getPhone());
 
@@ -173,13 +175,15 @@ public class homeActivity extends Activity {
 
                 Toast.makeText(homeActivity.this, sitename + " " + siteUsername + " " + l + " " + n + " " + p, Toast.LENGTH_SHORT).show();
             }
-            if (requestCode == 101){
+            if (requestCode == 101) {
 
                 Bundle bundle = data.getExtras();
                 ramdonCode = bundle.getString("randomCode");
 //                Toast.makeText(getApplicationContext(),plainText,Toast.LENGTH_SHORT).show();
-                Toast.makeText(getApplicationContext(),AES.parseByte2HexStr(AES.encrypt(plainText,ramdonCode)),Toast.LENGTH_SHORT).show();
-                Log.i("haha",AES.parseByte2HexStr(AES.encrypt(plainText, ramdonCode)));
+//                Toast.makeText(getApplicationContext(), "我是谁" + AES.parseByte2HexStr(AES.encrypt(plainText, ramdonCode)), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "二维码格式不正确", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "传送成功", Toast.LENGTH_SHORT).show();
+                Log.i("haha", AES.parseByte2HexStr(AES.encrypt(plainText, ramdonCode)));
             }
         }
     }

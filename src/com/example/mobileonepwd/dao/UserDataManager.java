@@ -175,7 +175,7 @@ public class UserDataManager {
     /**
      * @return
      */
-    public void deleteAllUserDatas() {
+    public void deleteAllUsers() {
 
         mSQLiteDatabase.execSQL("delete from " + TABLE_NAME_USER+";");
     }

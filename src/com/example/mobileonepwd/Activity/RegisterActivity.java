@@ -39,6 +39,8 @@ public class RegisterActivity extends Activity {
         easyPwd = (EditText) findViewById(R.id.register_edit_easepwd);
         secPwd = (EditText) findViewById(R.id.register_edit_secpwd);
 
+        easyPwd.setVisibility(View.INVISIBLE);
+
         registerButton = (Button) findViewById(R.id.register_btn_register);
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
